@@ -1,0 +1,49 @@
+global_costmap:
+  ros__parameters:
+    global_frame: map
+    robot_base_frame: base_link
+    update_frequency: 5.0
+    publish_frequency: 2.0
+    rolling_window: false
+    width: 50.0
+    height: 50.0
+    resolution: 0.05
+    plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+    static_layer:
+      plugin: "nav2_costmap_2d::StaticLayer"
+    obstacle_layer:
+      plugin: "nav2_costmap_2d::ObstacleLayer"
+      observation_sources: detected
+      detected:
+        data_type: PointCloud2
+        topic: /detected_obstacles
+        expected_update_rate: 0.5
+        marking: true
+        clearing: false
+        obstacle_max_height: 2.0
+    inflation_layer:
+      plugin: "nav2_costmap_2d::InflationLayer"
+      inflation_radius: 0.6
+
+local_costmap:
+  ros__parameters:
+    global_frame: odom
+    robot_base_frame: base_link
+    update_frequency: 10.0
+    publish_frequency: 5.0
+    rolling_window: true
+    width: 10.0
+    height: 10.0
+    resolution: 0.05
+    plugins: ["obstacle_layer", "inflation_layer"]
+    obstacle_layer:
+      plugin: "nav2_costmap_2d::ObstacleLayer"
+      observation_sources: detected
+      detected:
+        data_type: PointCloud2
+        topic: /detected_obstacles
+        marking: true
+        clearing: false
+    inflation_layer:
+      plugin: "nav2_costmap_2d::InflationLayer"
+      inflation_radius: 0.5
