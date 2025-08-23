@@ -1,0 +1,28 @@
+# ====== paths ======
+seed: 42
+out_dir: outputs
+num_workers: 2
+
+# adjust these to your data location in Colab/PC
+train:
+  pc_dir: "/content/data/pointclouds"          # folder containing *.npy point clouds
+  list_file: "/content/data/train.txt"    # list of filenames, one per line
+  label_map_file: "/content/data/labels_combined.txt"  # "filename.npy <class_id>"
+  box_json_file: "/content/data/box_labels.json"
+
+val:
+  pc_dir: "/content/data/pointclouds"
+  list_file: "/content/data/val.txt"
+  label_map_file: "/content/data/labels_combined.txt"
+  box_json_file: "/content/data/box_labels.json"
+
+# ====== model / train ======
+num_classes: 39
+npoints: 4096
+batch_size: 16
+epochs: 120
+lr: 0.001
+weight_decay: 0.05
+dropout: 0.3
+lambda_box: 2.0
+amp: true

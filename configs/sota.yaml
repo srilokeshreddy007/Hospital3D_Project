@@ -1,0 +1,27 @@
+seed: 42
+
+data:
+  root: /home/sri/Desktop/hospital3d_project/hospital3d_project/data
+  train_list: /home/sri/Desktop/hospital3d_project/hospital3d_project/data/train.txt
+  val_list: /home/sri/Desktop/hospital3d_project/hospital3d_project/data/val.txt
+  labels_file: /home/sri/Desktop/hospital3d_project/hospital3d_project/data/labels.txt
+  box_json: /home/sri/Desktop/hospital3d_project/hospital3d_project/data/boxes.json
+  num_points: 1024   # smaller = faster on CPU (e.g., 1024)
+
+model:
+  num_classes: 38
+  backbone: pointnext_tiny  # selectable
+  box_head: residual        # or "votes" for VoteNet-lite head
+  width: 256                # backbone output dim
+
+train:
+  out_dir: /home/sri/Desktop/hospital3d_project/hospital3d_project/outputs
+  runs_dir: /home/sri/Desktop/hospital3d_project/hospital3d_project/runs
+  batch_size: 4            # reduce to 4 if CPU is slow
+  epochs: 30          # shorten if you’re time-constrained
+  lr: 0.0003
+  weight_decay: 0.02
+  num_workers: 2
+
+loss:
+  box_weight: 0.2
